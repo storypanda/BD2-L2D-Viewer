@@ -4,6 +4,7 @@
     <nav class="flex items-center justify-between bg-black text-white p-4">
       <div class="text-xl md:text-3xl font-bold">Brown Dust 2 L2D Viewer</div>
       <div class="hidden md:flex items-center gap-4">
+        <LanguageSelector />
         <button class="cursor-pointer" @click="showUploadModal = true">
           <PlusIcon class="w-5 h-5 md:w-7 md:h-7" />
         </button>
@@ -57,19 +58,23 @@
       <div
         class="bg-black text-white w-60 p-4 flex flex-col gap-4 h-full"
       >
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-400">{{ t('language', languageStore.currentLanguage) }}</span>
+          <LanguageSelector />
+        </div>
         <button
           class="flex items-center gap-2"
           @click="() => { showUploadModal = true; closeMobileMenu(); }"
         >
           <PlusIcon class="w-5 h-5" />
-          <span>Upload</span>
+          <span>{{ t('upload', languageStore.currentLanguage) }}</span>
         </button>
         <button
           class="flex items-center gap-2"
           @click="() => { showChangelog = true; closeMobileMenu(); }"
         >
           <ChangelogIcon class="w-5 h-5" />
-          <span>Changelog</span>
+          <span>{{ t('changelog', languageStore.currentLanguage) }}</span>
         </button>
         <a
           href="https://github.com/Jelosus2/BD2-L2D-Viewer"
@@ -111,6 +116,9 @@
 import { ref, onMounted } from 'vue';
 import ChangelogModal from '@/components/ChangelogModal.vue';
 import UploadSpineModal from '@/components/UploadSpineModal.vue';
+import LanguageSelector from '@/components/LanguageSelector.vue';
+import { useLanguageStore } from '@/stores/languageStore';
+import { t } from '@/utils/i18n';
 
 import GithubIcon from '@/components/icons/GithubIcon.vue';
 import ChangelogIcon from '@/components/icons/ChangelogIcon.vue';
@@ -118,6 +126,7 @@ import PlusIcon from '@/components/icons/PlusIcon.vue';
 import MenuIcon from '@/components/icons/MenuIcon.vue';
 import KoFiIcon from '@/components/icons/KoFiIcon.vue';
 
+const languageStore = useLanguageStore();
 const showChangelog = ref(false);
 const showUploadModal = ref(false);
 const showKofiTooltip = ref(false);

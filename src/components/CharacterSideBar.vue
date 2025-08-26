@@ -3,7 +3,7 @@
     <input
       v-model="filter"
       type="text"
-      placeholder="Search..."
+      :placeholder="t('search', languageStore.currentLanguage)"
       class="bg-gray-700 text-white p-2 mb-2 outline-none w-full"
     />
     <div class="overflow-y-auto flex-1 px-2 sidebar-scroll">
@@ -29,9 +29,12 @@
 import icons from '@/utils/charIcons';
 import { ref, computed, onMounted } from 'vue'
 import { useCharacterStore } from '@/stores/characterStore'
+import { useLanguageStore } from '@/stores/languageStore'
+import { t } from '@/utils/i18n'
 
 const emit = defineEmits(['select'])
 const store = useCharacterStore()
+const languageStore = useLanguageStore()
 
 const filter = ref('')
 
